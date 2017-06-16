@@ -44,11 +44,11 @@ RUN mkdir /etc/mysql/run
 ADD ["runit/mysql.sh" , "/etc/mysql/run"]
 RUN chmod +x /etc/mysql/run
 ADD ["build/Setup" , "/root/setup"]
-    mysql -e "CREATE DATABASE IF NOT EXISTS Jiradb DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;"
-    mysql -e "use Jiradb;"
+    mysql -uroot -proot mysql -e "CREATE DATABASE IF NOT EXISTS Jiradb DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;"
+    mysql -uroot -proot mysql -e "use Jiradb;"
     mysql -uroot -proot -e "CREATE USER '${MYSQL_USER}'localhost'%' IDENTIFIED BY '${MYSQL_PASS}';"
     mysql -uroot -proot -e "GRANT ALL PRIVILEGES ON *.* TO '${MYSQL_USER}'@'localhost' WITH GRANT OPTION; FLUSH PRIVILEGES;"
-    RUN "mysql -u $MYSQL_USER -p $MYSQL_PASSWORD $MYSQL_DATABASE < /root/setup/Jiradb.sql"
+    RUN "mysql -u $MYSQL_USER -p $MYSQL_PASSWORD -D $MYSQL_DATABASE < /root/setup/Jiradb.sql"
 #ADD ["my_init.d/99_mysql_setup.sh" , "/etc/my_init.d/99_mysql_setup.sh"]
 #RUN chmod +x /etc/my_init.d/99_mysql_setup.sh
 #ADD ["/root/setup/Jiradb.sql" , "/etc/Jiradb.sql"]
