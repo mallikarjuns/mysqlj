@@ -29,12 +29,12 @@ RUN echo "mysql-server mysql-server/root_password_again password root" | debconf
 RUN apt-get install -y mysql-server
     #echo '*** Starting mysqld'
     # The sleep 1 is there to make sure that inotifywait starts up before the socket is created
-    mysqld_safe &
-    chown -R mysql /var/run/mysqld/
+    #mysqld_safe &
+    #chown -R mysql /var/run/mysqld/
     #echo '*** Waiting for mysqld to come online'
-    while [ ! -x /var/run/mysqld/mysqld.sock ]; do
-        sleep 1
-    done
+    #while [ ! -x /var/run/mysqld/mysqld.sock ]; do
+    #    sleep 1
+    #done
 #RUN rm -rf /var/lib/mysql/*
      #echo '*** Setting root password to root'
     /usr/bin/mysqladmin -u root password 'root'
