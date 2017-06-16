@@ -37,7 +37,7 @@ RUN apt-get install -y mysql-server
     #done
 #RUN rm -rf /var/lib/mysql/*
      #echo '*** Setting root password to root'
-    /usr/bin/mysqladmin -u root password 'root'
+    #/usr/bin/mysqladmin -u root password 'root'
 ADD ["build/my.cnf" , "/etc/mysql/my.cnf"]
 ADD ["build/dbconfig.xml" , "/var/atlassian/application-data/jira"]
 RUN mkdir /etc/mysql/run
