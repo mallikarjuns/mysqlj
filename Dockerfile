@@ -45,8 +45,8 @@ ADD ["runit/mysql.sh" , "/etc/mysql/run"]
 RUN chmod +x /etc/mysql/run
 ADD ["build/Setup" , "/root/setup"]
 RUN chmod +x /root/setup
-    #RUN mysql -u root --password="root" -e "CREATE DATABASE IF NOT EXISTS Jiradb DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;"
-    #RUN mysql -u root --password="root" -e "use Jiradb;"
+    RUN "mysql -u root --password="root" -e CREATE DATABASE IF NOT EXISTS Jiradb DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;"
+    RUN "mysql -u root --password="root" -e use Jiradb;"
     RUN "mysql -u root --password="root" -e CREATE USER '${MYSQL_USER}' @ 'localhost' IDENTIFIED BY '${MYSQL_PASS}';"
     RUN "mysql -u root --password="root" -e GRANT ALL PRIVILEGES ON *.* TO '${MYSQL_USER}'@'localhost' WITH GRANT OPTION;"
     RUN "mysql -u $MYSQL_USER -p $MYSQL_PASSWORD -D Jiradb < /root/setup/Jiradb.sql"
