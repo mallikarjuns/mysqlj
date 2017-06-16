@@ -20,7 +20,7 @@ WORKDIR /opt/atlassian/jira
 COPY "docker-entrypoint.sh" "/"
 ENTRYPOINT ["/docker-entrypoint.sh"]
 RUN chmod +x /docker-entrypoint.sh
-EXPOSE 8085
+EXPOSE 8080
 ENV MYSQL_USER root
 ENV MYSQL_PASS root
 ENV MYSQL_DATABASE Jiradb
