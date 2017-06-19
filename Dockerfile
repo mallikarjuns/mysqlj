@@ -23,7 +23,7 @@ RUN chmod +x /docker-entrypoint.sh
 EXPOSE 8080
 ENV MYSQL_USER root
 ENV MYSQL_PASS root
-#ENV MYSQL_DATABASE Jiradb
+ENV MYSQL_DATABASE Jiradb
 RUN echo "mysql-server mysql-server/root_password password root" | debconf-set-selections
 RUN echo "mysql-server mysql-server/root_password_again password root" | debconf-set-selections
 RUN apt-get install -y mysql-server
@@ -45,8 +45,8 @@ ADD ["runit/mysql.sh" , "/etc/mysql/run"]
 RUN chmod +x /etc/mysql/run
 ADD ["build/Setup" , "/root/setup"]
 RUN chmod +x /root/setup
-    RUN "mysql -u $MYSQL_USER -p $MYSQL_PASS -e "CREATE DATABASE IF NOT EXISTS Jiradb DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;""
-    RUN "mysql -u $MYSQL_USER -p $MYSQL_PASS -e "use Jiradb;""
+    RUN "mysql -u $MYSQL_USER -p $MYSQL_PASS -e "CREATE DATABASE $MYSQL_DATABASE DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;""
+    RUN "mysql -u $MYSQL_USER -p $MYSQL_PASS -e "use $MYSQL_DATABASE;""
     RUN "mysql -u $MYSQL_USER -p $MYSQL_PASS -e "CREATE USER '${MYSQL_USER}' @ 'localhost' IDENTIFIED BY '${MYSQL_PASS}';""
     RUN "mysql -u $MYSQL_USER -p $MYSQL_PASS -e "GRANT ALL PRIVILEGES ON *.* TO '${MYSQL_USER}'@'localhost' WITH GRANT OPTION;""
     RUN "mysql -u $MYSQL_USER -p $MYSQL_PASS -D Jiradb < /root/setup/Jiradb.sql"
