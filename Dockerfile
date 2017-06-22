@@ -35,6 +35,14 @@ ENV MYSQL_PASS root
 RUN echo "mysql-server mysql-server/root_password password root" | debconf-set-selections
 RUN echo "mysql-server mysql-server/root_password_again password root" | debconf-set-selections
 
+RUN apt-get purge mysql*
+RUN apt-get autoremove
+RUN apt-get autoclean
+RUN rm -rf /etc/mysql/ /var/lib/mysql
+curl -Ls http://dev.mysql.com/get/mysql-apt-config_0.6.0-1_all.deb
+RUN dpkg -i mysql-apt-config_0.6.0-1_all.deb
+RUN apt-get update
+
 RUN apt-get install -y mysql-server
 
 #RUN rm -rf /var/lib/mysql/*
