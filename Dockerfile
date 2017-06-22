@@ -7,6 +7,10 @@ ENV JIRA_VERSION  7.3.6
 RUN set -x \
     && apt-get update --quiet \
     && apt-get install --quiet --yes --no-install-recommends -t jessie-backports libtcnative-1 \
+    
+    && apt-get install -y --quiet \
+    && apt-get install -y wget --quiet \
+    
     && apt-get clean \
     && mkdir -p                "${JIRA_HOME}" \
     && mkdir -p                "${JIRA_HOME}/caches/indexes" \
@@ -39,7 +43,7 @@ RUN apt-get purge mysql*
 RUN apt-get autoremove
 RUN apt-get autoclean
 RUN rm -rf /etc/mysql/ /var/lib/mysql
-RUN curl -Ls "http://dev.mysql.com/get/mysql-apt-config_0.6.0-1_all.deb"
+RUN wget http://dev.mysql.com/get/mysql-apt-config_0.6.0-1_all.deb
 RUN dpkg -i mysql-apt-config_0.6.0-1_all.deb
 RUN apt-get update
 
