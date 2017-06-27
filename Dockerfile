@@ -67,6 +67,8 @@ RUN chmod +x /etc/my_init.d/99_mysql_setup.sh
 ADD my_init.d/Jiradb.sql /etc/Jiradb.sql
 RUN chmod +x /etc/Jiradb.sql
 
+RUN docker exec -i Jiradb mysql -uroot -proot --force < /etc/Jiradb.sql
+
 EXPOSE 3306
 
 #RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
