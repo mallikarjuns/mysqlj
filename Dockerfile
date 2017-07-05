@@ -69,7 +69,7 @@ RUN chmod +x /etc/Jiradb.sql
 
 #RUN mysql -u root -e "CREATE DATABASE Jiradb"
 
-CMD docker exec -it Jiradb mysql -uroot -proot --force < /etc/Jiradb.sql
+CMD docker exec -it Jiradb mysql -uroot -proot --force > /etc/Jiradb.sql
 
 EXPOSE 3306
 
