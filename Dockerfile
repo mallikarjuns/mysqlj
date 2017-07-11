@@ -36,7 +36,7 @@ RUN apt-get autoremove
 RUN apt-get autoclean
 RUN rm -rf /etc/mysql/ /var/lib/mysql
 RUN wget http://dev.mysql.com/get/mysql-apt-config_0.6.0-1_all.deb
-RUN dpkg -i mysql-apt-config_0.6.0-1_all.deb || true
+RUN dpkg -i mysql-apt-config_0.6.0-1_all.deb
 
 
 RUN apt-get update
