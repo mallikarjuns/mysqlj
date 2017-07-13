@@ -39,10 +39,6 @@ RUN apt-get install -y mysql-server
 ADD build/my.cnf /etc/mysql/my.cnf
 ADD build/dbconfig.xml /var/atlassian/application-data/jira
 
-RUN mkdir /etc/mysql/run
-ADD runit/mysql.sh /etc/mysql/run
-RUN chmod +x /etc/mysql/run
-
 ADD build/Setup /root/setup
 
 
