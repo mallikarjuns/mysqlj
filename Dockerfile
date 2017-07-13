@@ -17,6 +17,7 @@ RUN set -x \
 && curl -Ls "https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-core-${JIRA_VERSION}.tar.gz" | tar -xz --directory "${JIRA_INSTALL}" --strip-components=1 --no-same-owner \
 && curl -Ls "https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.38.tar.gz" | tar -xz --directory "${JIRA_INSTALL}/lib" --strip-components=1 --no-same-owner "mysql-connector-java-5.1.38/mysql-connector-java-5.1.38-bin.jar" \
 
+VOLUME ["/var/atlassian/application-data/jira", "/opt/atlassian/jira/logs"]
 WORKDIR /opt/atlassian/jira
 
 ADD build/server.xml /opt/atlassian/jira/conf
